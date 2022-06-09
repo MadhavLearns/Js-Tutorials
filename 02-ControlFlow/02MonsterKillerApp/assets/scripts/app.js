@@ -15,12 +15,30 @@ const LOG_HEAL_APPLIED = 'HEAL_APPLIED';
 
 let logData = [];
 
-const enteredMaxLifeValue = prompt('Choose the health for player and monster.' , 100);
-let choosenMaxLife = parseInt(enteredMaxLifeValue);
 
-if(isNaN(choosenMaxLife) || choosenMaxLife <= 0){
+function getMaxLife() {
+  const enteredMaxLifeValue = prompt(
+    "Choose the health for player and monster.",
+    100
+  );
+  let parsedInput = parseInt(enteredMaxLifeValue);
+
+  if (isNaN(parsedInput) || parsedInput <= 0) {
+    throw {message: 'Invalid input is entered. number expected.'};
+  }
+
+  return parsedInput
+
+}
+
+let choosenMaxLife;
+try{
+    choosenMaxLife = getMaxLife();
+}catch(error){
+    console.log(error);
     choosenMaxLife = 100;
 }
+
 
 let currentMonsterHealth = choosenMaxLife;
 let currentPlayerHealth = choosenMaxLife;
@@ -139,10 +157,10 @@ function logHandler(){
     //console.log(logData);
 
     //using for loop
-    // for(let i = 0; i < logData.length; i++){
-    //     console.log(`Entry#${i}: `)
-    //     console.log(logData[i]);
-    // }
+    for(let i = 0; i < logData.length; i++){
+        console.log(`Entry#${i}: `)
+        console.log(logData[i]);
+    }
 
     //using for of loop
     // let i = 0;
